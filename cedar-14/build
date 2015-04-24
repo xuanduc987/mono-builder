@@ -1,22 +1,32 @@
 set -e
-
+echo "Build started."
 if [ ! -f "/var/cache/mono-$VERSION.tar.bz2" ]; then
+  echo "Downloading mono-$VERSION.tar.bz2"
   wget -q -O /var/cache/mono-$VERSION.tar.bz2 http://download.mono-project.com/sources/mono/mono-$VERSION.tar.bz2
 fi
-
+echo "Decompressing"
 tar jxf /var/cache/mono-$VERSION.tar.bz2
-
+echo "Run configure"
 cd mono-$VERSION
 ./configure --prefix=/app/mono \
     --disable-moonlight --disable-nls --enable-minimal=aot,profiler,debug,logging \
     --disable-libraries --disable-boehm --with-mcs-docs=no \
     --with-profile2=no
-make && make install
-
+echo "Run make"
+make
+echo "Run make install"
+make install
+echo "Cd to /app"
 cd /app
-
+echo "Delete mdbs"
 find . -name "*.mdb" -delete
+echo "Strip symbols"
+set +e
 find mono | xargs strip 2> /dev/null
+echo "Remove some libs"
+set -e
 rm -rf mono/lib/mono/gac/EntityFramework* mono/lib/mono/gac/System.Web* mono/lib/mono/gac/System.Windows.Forms*
-
-tar -zcf - mono | /gof3r put --md5Check-off -b mono-dependencies -k $STACK/mono-$VERSION.tar.gz
+echo "Compress buildpack"
+tar -zcf mono-$VERSION.tar.gz mono
+echo "Copy buildpack"
+mv mono-$VERSION.tar.gz /var/cache/mono-$VERSION.tar.gz
