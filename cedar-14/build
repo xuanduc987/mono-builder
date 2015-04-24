@@ -38,7 +38,7 @@ set +e
 find mono | xargs strip 2> /dev/null
 echo "Remove some libs"
 set -e
-rm -rf mono/lib/mono/gac/EntityFramework* mono/lib/mono/gac/System.Web* mono/lib/mono/gac/System.Windows.Forms*
+rm -rf mono/lib/mono/gac/EntityFramework* mono/lib/mono/gac/System.Windows.Forms*
 echo "Compress buildpack"
 tar -zcf mono-$VERSION.tar.gz mono
 echo "Copy buildpack"
