@@ -16,6 +16,16 @@ echo "Run make"
 make
 echo "Run make install"
 make install
+cd ..
+echo "Install fsharp"
+git clone https://github.com/fsharp/fsharp
+cd fsharp
+echo "Run autogen"
+./autogen.sh --prefix=/app/mono
+echo "Run make"
+make
+echo "Run make install"
+make install
 echo "Cd to /app"
 cd /app
 echo "Delete mdbs"
