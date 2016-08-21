@@ -18,8 +18,24 @@ cd mono-$VERSION
     --with-profile2=no
 make && make install
 
-echo "Build completed"
+echo "Mono build completed"
 
+cd ..
+echo "Install fsharp"
+git clone https://github.com/fsharp/fsharp
+cd fsharp
+export PATH=/app/mono/bin:$PATH
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/app/mono/lib/
+export PKG_CONFIG_PATH=/app/mono/lib/pkgconfig/
+echo "Run autogen"
+./autogen.sh --prefix=/app/mono
+echo "Run make"
+make
+echo "Run make install"
+make install
+echo "Fsharp installed"
+
+cd ..
 cd /app
 ls -al
 
