@@ -13,4 +13,5 @@ RUN apt-get -q -y install curl gcc g++ make wget unzip git autoconf pkg-config l
 
 
 COPY build build
+RUN chmod +x build
 CMD ./build
