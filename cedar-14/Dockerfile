@@ -8,7 +8,7 @@ RUN echo "deb http://download.mono-project.com/repo/debian wheezy/snapshots/4.0.
     && apt-get install -y mono-devel ca-certificates-mono mono-vbnc \
     && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get -q update \
+RUN apt-get -q update
 RUN apt-get -q -y install curl gcc g++ make wget unzip git autoconf pkg-config libtool automake build-essential mono-devel gettext
 
 
