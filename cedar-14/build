@@ -48,7 +48,6 @@ echo "Delete *.mdb"
 
 find . -name "*.mdb" -delete
 find mono -name *Entity* -delete
-find mono -name *System.Windows.Forms* -delete
 find mono -name sqlmetal.exe -delete
 
 echo "Running strip"
