@@ -42,7 +42,6 @@ ls -al
 echo "Delete EntityFramework et al"
 
 rm -rf mono/lib/mono/gac/EntityFramework* \
-   mono/lib/mono/gac/System.Windows.Forms* \
    mono/lib/mono/gac/System.Data.Entity
 
 echo "Delete *.mdb"
